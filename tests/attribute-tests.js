@@ -172,4 +172,24 @@ describe('attributes', function() {
 		openCount.should.equal(1);
 		attrCount.should.equal(1);
 	});
+
+
+	it('with line break in value', function () {
+		var openCount = 0, attrCount = 0;
+		helpers.parseString('<foo bar="b\naz">', {
+			openElement: function(name) {
+				name.should.equal('foo');
+				openCount++;
+			},
+
+			attribute: function(name, value) {
+				name.should.equal('bar');
+				value.should.equal('b\naz');
+				attrCount++;
+			}
+		});
+
+		openCount.should.equal(1);
+		attrCount.should.equal(1);
+	});
 });

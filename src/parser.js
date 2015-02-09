@@ -9,7 +9,7 @@ function readAttribute(context) {
 		var quote = /['"]/.test(context.current) ? context.current : '';
 		var attributeValueRegex = !quote
 			? /(.*?)(?=[\s>])/
-			: new RegExp(quote + '(.*?)' + quote);
+			: new RegExp(quote + '([^]*?)' + quote);
 
 		var match = attributeValueRegex.exec(context.substring) || [0, ''];
 		value = match[1];
